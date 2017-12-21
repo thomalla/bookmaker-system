@@ -15,8 +15,8 @@ import java.util.Set;
 /**
  * Created by Tomasz on 2017-11-15.
  */
-@Entity
-@DiscriminatorValue("whoscorebets")
+@Entity(name = "whoscore")
+
 public class WhoScore extends Bets {
 
     @NotNull

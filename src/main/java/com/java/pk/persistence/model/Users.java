@@ -2,12 +2,13 @@ package com.java.pk.persistence.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,6 +21,11 @@ public class Users implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+
+    @NotBlank
+    @Column(unique = true, nullable = false)
+    private String username;
 
     @NotBlank
     private String name;
@@ -34,17 +40,35 @@ public class Users implements Serializable{
     @NotBlank
     private String password;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createDate;
-
+    private Date date;
 
     private double accountBalance;
+
+    @Column(name = "ENABLED")
+    @NotNull
+    private Boolean enabled;
+
+    @Column(name = "LASTPASSWORDRESETDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastPasswordResetDate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_authorities",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
+    private List<Authority> authorities;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
     private Set<Coupon> coupons = new HashSet<Coupon>(0);
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public long getId() {
         return id;
@@ -70,10 +94,14 @@ public class Users implements Serializable{
         this.surname = surname;
     }
 
+
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Set<Coupon> getCoupons() {
         return coupons;
@@ -83,9 +111,7 @@ public class Users implements Serializable{
         this.coupons = coupons;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public String getPassword() {
         return password;
@@ -103,11 +129,36 @@ public class Users implements Serializable{
         this.accountBalance = accountBalance;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
 }

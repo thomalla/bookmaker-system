@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 well well-sm center">
+      <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a> Sign up!</legend>
+      <form ngNativeValidate [formGroup]="userForm" (ngSubmit)="createUser()" onkeyup="return confirmPassword()" class="form" role="form">
+        <div class="row">
+          <div class="col-xs-6 col-md-6">
+            <input class="form-control" formControlName="name" placeholder="First Name" type="text" required autofocus >
+          </div>
+
+          <div class="col-xs-6 col-md-6">
+            <input class="form-control" formControlName="surname" placeholder="Last Name" type="text" required />
+          </div>
+        </div>
+        <input class="form-control" formControlName="username" placeholder="Your login" type="text"  required/>
+        <input class="form-control" formControlName="email" placeholder="Your Email" type="email" required/>
+        <input class="form-control"  id="password" formControlName="password" placeholder="Password" type="password" required/>
+        <input class="form-control" id="passwordRepeated" formControlName="confirmpassword" placeholder="Confirm password" type="password" required/>
+        <label for="">
+          Birth Date</label>
+        <input class="form-control" formControlName="date" placeholder="Your login" type="date" required/>
+        <!--<div *ngFor="let error of errors"> -->
+        <div class="alert alert-danger text-center" *ngFor="let error of errors">
+          {{error}}
+        </div>
+        <!-- </div> -->
+        <br />
+        <br />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Sign up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

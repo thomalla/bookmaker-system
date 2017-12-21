@@ -10,8 +10,8 @@ import javax.persistence.Entity;
 /**
  * Created by Tomasz on 2017-11-15.
  */
-@Entity
-@DiscriminatorValue("whowinbets")
+@Entity(name = "whowin")
+
 public class WhoWin extends Bets {
 
     @NotBlank

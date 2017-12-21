@@ -7,15 +7,13 @@ import com.java.pk.persistence.model.enums.TypeOfBet;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Tomasz on 2017-11-15.
  */
-@Entity
-@Table(name = "bets")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
-@DiscriminatorValue(value="bets")
+//@MappedSuperclass
+    @Entity
 public class Bets {
 
     @Id
@@ -37,6 +35,8 @@ public class Bets {
 
     @NotNull
     private double course;
+
+
 
     public long getId() {
         return id;

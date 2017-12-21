@@ -22,24 +22,16 @@ public class Matches implements Serializable {
     @GeneratedValue
     private long id;
 
-    @ManyToMany(mappedBy = "matches", fetch = FetchType.LAZY)
-    private List<Bets> bets;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "matches")
+    private Set<Bets> bets = new HashSet<Bets>(0);
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date date;
 
-    @NotNull
-    private int homeTeamId;
-
-    @NotNull
-    private int awayTeamId;
-
-    @NotNull
     private int homeTeamGoals;
 
-    @NotNull
     private int awayTeamGoals;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,11 +57,11 @@ public class Matches implements Serializable {
         this.id = id;
     }
 
-    public List<Bets> getBets() {
+    public Set<Bets> getBets() {
         return bets;
     }
 
-    public void setBets(List<Bets> bets) {
+    public void setBets(Set<Bets> bets) {
         this.bets = bets;
     }
 
@@ -79,22 +71,6 @@ public class Matches implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public int getHomeTeamId() {
-        return homeTeamId;
-    }
-
-    public void setHomeTeamId(int homeTeamId) {
-        this.homeTeamId = homeTeamId;
-    }
-
-    public int getAwayTeamId() {
-        return awayTeamId;
-    }
-
-    public void setAwayTeamId(int awayTeamId) {
-        this.awayTeamId = awayTeamId;
     }
 
     public int getHomeTeamGoals() {

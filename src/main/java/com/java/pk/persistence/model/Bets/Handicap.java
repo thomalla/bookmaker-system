@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Tomasz on 2017-11-15.
  */
-@Entity
-@DiscriminatorValue("handicapbets")
+@Entity(name = "handicap")
+
 public class Handicap extends Bets {
 
     @NotNull

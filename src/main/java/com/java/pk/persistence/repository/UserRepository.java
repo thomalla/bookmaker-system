@@ -10,8 +10,11 @@ import java.util.List;
  * Created by Tomasz on 2017-11-15.
  */
 @Repository
-public interface UserService extends JpaRepository<Users, Long>{
+public interface UserRepository extends JpaRepository<Users, Long>{
 
-    public List<Users>  findAll();
-  //  public void createUsers(Users user);
+    List<Users>  findAll();
+    Users save(Users user);
+    Users findUsersByEmail(String username);
+    Users findByUsername(String username);
+   // boolean createUser(Users user);
 }
